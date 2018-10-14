@@ -5,34 +5,34 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
                 http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.1.xsd">
 
-	<!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
-	<cache:annotation-driven cache-manager="commonCacheManager" />
+    <!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
+    <cache:annotation-driven cache-manager="commonCacheManager"/>
 
-	<!-- redis cache manager 
-		redisCache1101: 用于缓存验证码获取次数限制 ——1分钟
-		redisCache1102: 用于缓存登录注册验证码——30分钟
-		其他缓存实例的配置可根据需要自行添加
-	-->
-	<bean id="commonCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
-		<constructor-arg name="template" ref="redisTemplate1100" />
-		<!-- 设置过期时间 24h -->
-		<property name="expires">
-			<map key-type="java.lang.String" value-type="java.lang.Long">
-				<entry key="redisCache1101" value="86400" />
-			</map>
-		</property>
-	</bean>
-	
-	<!-- redis 相关配置 -->
-	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-		<property name="maxIdle" value="${redis.maxIdle}" />
-        <property name="maxTotal" value="${redis.maxActive}" />
-        <property name="maxWaitMillis" value="${redis.maxWait}" />
-		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
-	</bean>
+    <!-- redis cache manager
+        redisCache1101: 用于缓存验证码获取次数限制 ——1分钟
+        redisCache1102: 用于缓存登录注册验证码——30分钟
+        其他缓存实例的配置可根据需要自行添加
+    -->
+    <bean id="commonCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="template" ref="redisTemplate1100"/>
+        <!-- 设置过期时间 24h -->
+        <property name="expires">
+            <map key-type="java.lang.String" value-type="java.lang.Long">
+                <entry key="redisCache1101" value="86400"/>
+            </map>
+        </property>
+    </bean>
 
-	<!-- redis 模板工厂 -->
-	<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <!-- redis 相关配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+
+    <!-- redis 模板工厂 -->
+    <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="usePool" value="true"/>
         <property name="hostName" value="${redis.host}"/>
         <property name="port" value="${redis.port}"/>
@@ -41,19 +41,19 @@
         <constructor-arg index="0" ref="poolConfig"/>
     </bean>
 
-	<!-- key 的序列化 -->
-	<bean id="keySerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+    <!-- key 的序列化 -->
+    <bean id="keySerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
 
-	<!-- token -->
-	<bean id="valueSerializer"
-		class="org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer">
-	</bean>
+    <!-- token -->
+    <bean id="valueSerializer"
+          class="org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer">
+    </bean>
 
-	<!--common redis 模板 -->
-	<bean id="redisTemplate1100" class="org.springframework.data.redis.core.RedisTemplate">
-		<property name="connectionFactory" ref="redisConnectionFactory" />
-		<property name="keySerializer" ref="keySerializer" />
-		<property name="valueSerializer" ref="valueSerializer" />
-	</bean>
+    <!--common redis 模板 -->
+    <bean id="redisTemplate1100" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="redisConnectionFactory"/>
+        <property name="keySerializer" ref="keySerializer"/>
+        <property name="valueSerializer" ref="valueSerializer"/>
+    </bean>
 
 </beans>
