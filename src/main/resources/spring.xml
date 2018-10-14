@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 注解自动扫描 -->
+    <context:component-scan base-package="net.logvv.minisdmf" />
+
+    <bean id="springContextHolder" class="net.logvv.minisdmf.common.spring.SpringContextHolder" lazy-init="false"/>
+
+    <!-- 将多个配置文件读取到容器中，交给Spring管理 -->
+    <bean id="propertyConfigurer" class="net.logvv.minisdmf.common.spring.DecryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!-- 使用file的方式引入，这样可以将配置和代码分离 -->
+                <value>application.properties</value>
+                <value>jdbc.properties</value>
+                <value>redis.properties</value>
+                <value>email.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 导入redis配置文件 -->
+    <import resource="spring-cache-redis.xml"/>
+
+    <!-- 配置线程池 -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 线程池维护线程的最少数量 -->
+        <property name="corePoolSize" value="5" />
+        <!-- 线程池维护线程所允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="30000" />
+        <!-- 线程池维护线程的最大数量 -->
+        <property name="maxPoolSize" value="50" />
+        <!-- 线程池所使用的缓冲队列 -->
+        <property name="queueCapacity" value="200" />
+    </bean>
+
+    <!-- 邮件发送配置 -->
+    <!-- 如果要使用用户名和密码验证,这一步需要 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.smtp.host}" />
+        <property name="port" value="${mail.smtp.port}" />
+        <property name="username" value="${mail.account.from}" />
+        <property name="password" value="${mail.account.password}" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
