@@ -3,7 +3,7 @@
     <groupId>net.logvv</groupId>
     <artifactId>minisdmf</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>minisdmf</name>
+    <name>minisdmf-provider</name>
     <description>http://www.logvv.net</description>
 
     <properties>
@@ -205,17 +205,26 @@
             <version>1.2.17</version>
         </dependency>
 
-        <!-- swagger2 -->
+        <!-- zookeeper -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.4.0</version>
+            <groupId>io.dubbo.springboot</groupId>
+            <artifactId>spring-boot-starter-dubbo</artifactId>
+            <version>1.0.0</version>
         </dependency>
-
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.4.0</version>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
