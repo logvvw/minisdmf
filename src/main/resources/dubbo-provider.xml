@@ -8,13 +8,18 @@
     <!-- 提供方应用信息 -->
     <dubbo:application name="provider"  />
     <!-- 注册中心服务地址 -->
-    <dubbo:registry  protocol="zookeeper" address="115.28.95.126"  check="false" />
+    <dubbo:registry id="zookeeper" protocol="zookeeper" address="${dubbo.registry.address}"  check="false" />
 
-    <!-- 用dubbo协议-->
-    <dubbo:protocol name="dubbo" port="-1" dispather="all" check="false" />
-    <dubbo:provider timeout="10000"  threads="10" threadpool="fixed"   loadbalance="roundrobin"/>
+    <!-- 用dubbo协议在30001-->
+    <dubbo:protocol name="dubbo" port="30001" dispather="all" />
+    <dubbo:provider timeout="10000" threads="10" threadpool="fixed"  loadbalance="roundrobin"/>
+
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="net.logvv.minisdmf.service" ref="uniqueIDService"/>
+    <dubbo:service interface="net.logvv.minisdmf.service.IUniqueIDService" ref="uniqueIDService"
+                   version="1.0" registry="zookeeper"/>
+
+    <!-- 具体服务接口的实现 -->
+    <bean id="uniqueIDService" class="net.logvv.minisdmf.service.impl.UniqueIDServiceImpl" />
 
 </beans>

@@ -12,10 +12,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * main application
  * @author logvvw
  */
-@EnableAutoConfiguration
-@ImportResource("classpath:spring.xml")
 @EnableAsync
 @EnableScheduling
+//@SpringBootApplication
+@EnableAutoConfiguration
+@ImportResource("classpath:spring.xml")
 public class Application
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
