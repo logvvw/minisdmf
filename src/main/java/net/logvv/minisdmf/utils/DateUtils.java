@@ -37,22 +37,24 @@ public final class DateUtils {
 	}
 
 	// 默认的时间格式为"yyyy-MM-dd HH:mm:ss"，若后续有其他需求，则可以另行添加
-	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	
-	private static final String DATA_FORMAT = "yyyy/MM/dd";
-	
-	private static final String MONTH_FORMAT = "yyyy/MM";
+	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+	public static final String YYYYMMDDHHMMSS_FORMAT = "yyyyMMddHHmmss";
+
+	public static final String DATA_FORMAT = "yyyy/MM/dd";
+
+	public static final String MONTH_FORMAT = "yyyy/MM";
 	
 	// 默认的时间格式为"yyyy-MM-dd HH:mm:ss"，若后续有其他需求，则可以另行添加
 	private static DateTimeFormatter defaultFormatter = DateTimeFormat.forPattern(DEFAULT_DATE_FORMAT);
 	
 	// 当前日期标签，很多类似日志文件需要打时间标签
-	private static final String DATE_MARK = "yyyyMMdd";
+	public static final String DATE_MARK = "yyyyMMdd";
 	
 	// 默认的时间格式
 	//private static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
-	
-	private static final String HOUR_MINUTE = "HH:mm";
+
+	public static final String HOUR_MINUTE = "HH:mm";
 	
 	/**
 	 * 

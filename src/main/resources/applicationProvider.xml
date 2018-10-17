@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息 -->
+    <dubbo:application name="provider"  />
+    <!-- 注册中心服务地址 -->
+    <dubbo:registry  protocol="zookeeper" address="115.28.95.126"  check="false" />
+
+    <!-- 用dubbo协议-->
+    <dubbo:protocol name="dubbo" port="-1" dispather="all" check="false" />
+    <dubbo:provider timeout="10000"  threads="10" threadpool="fixed"   loadbalance="roundrobin"/>
+
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="net.logvv.minisdmf.service" ref="uniqueIDService"/>
+
+</beans>
