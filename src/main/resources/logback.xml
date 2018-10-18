@@ -7,7 +7,6 @@
         </encoder>
     </appender>
     <appender name="minisdmf" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Encoding>UTF-8</Encoding>
         <File>${LOG_HOME}/minisdmf.log</File>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>DEBUG</level>
@@ -23,7 +22,6 @@
     </appender>
 
     <appender name="thirdlib" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <Encoding>UTF-8</Encoding>
         <File>${LOG_HOME}/thirdlib.log</File>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>DEBUG</level>
