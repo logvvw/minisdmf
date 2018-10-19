@@ -22,7 +22,7 @@ public class ScheduleService
     @PostConstruct
     public void init()
     {
-        System.out.println("Server init !");
+        System.out.println("Server start !");
     }
     
     /**
