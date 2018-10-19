@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -24,7 +25,12 @@ public class Application
 
     public static void main( String[] args )
     {
-        SpringApplication.run(Application.class, args);
+        ApplicationContext ctx = SpringApplication.run(Application.class, args);
+        String[] activeProfiles = ctx.getEnvironment().getActiveProfiles();
+
+        for (String profile : activeProfiles) {
+            LOGGER.warn("running on profile={}", profile);
+        }
 
         LOGGER.info("Begin to run minisdmf ...");
     }
