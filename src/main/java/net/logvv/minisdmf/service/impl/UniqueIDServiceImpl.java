@@ -1,9 +1,9 @@
 package net.logvv.minisdmf.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import net.logvv.minisdmf.service.IUniqueIDService;
 import net.logvv.minisdmf.utils.DateUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.UUID;
