@@ -12,7 +12,7 @@
 
     <!-- 用dubbo协议在30001-->
     <dubbo:protocol name="dubbo" port="30001" dispather="all" />
-    <dubbo:provider timeout="10000" threads="10" threadpool="fixed"  loadbalance="roundrobin"/>
+    <dubbo:provider timeout="10000" threads="10" threadpool="fixed" loadbalance="roundrobin"/>
 
 
     <!-- 声明需要暴露的服务接口 -->
