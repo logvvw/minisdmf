@@ -29,7 +29,7 @@ public class Application
         String[] activeProfiles = ctx.getEnvironment().getActiveProfiles();
 
         for (String profile : activeProfiles) {
-            LOGGER.warn("running on profile={}", profile);
+            LOGGER.warn("running on profile {}", profile);
         }
 
         LOGGER.info("Begin to run minisdmf ...");
